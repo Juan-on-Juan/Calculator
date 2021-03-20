@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -17,12 +19,22 @@ public class History extends AppCompatActivity {
 
     private ListView lista;
 
+    Button clear;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         lista = (ListView) findViewById(R.id.hist_list);
+        clear = (Button) findViewById(R.id.clear_hist);
         DataMan = new DataManager(this);
+        clear.setOnClickListener(new View.OnClickListener(){
+           public void onClick(View v){
+               DataMan.ClearDb();
+               finish();
+               startActivity(getIntent());
+           }
+        });
 
         LoadHist();
     }

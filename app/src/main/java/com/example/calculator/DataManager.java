@@ -53,11 +53,17 @@ public class DataManager extends SQLiteOpenHelper {
         return data;
     }
 
-    public void ClearDb(){
-        // SOON!
+    public boolean checkExistance(){
+        if(getData() != null){
+            return true;
+        } else {
+            return false;
+        }
     }
 
-    public void removeFromDb(String expression){
-        // SOON!
+    public void ClearDb(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "DELETE FROM History";
+        db.execSQL(query);
     }
 }

@@ -19,6 +19,7 @@ import java.text.DecimalFormat;
 
 public class MainActivity extends AppCompatActivity {
     Button eq, ac, plusmin, delete, div, mul, plus, min, jedan, dva, tri, cetiri, pet, sest, sedam, osam, devet, nula, point, slideNorm;
+    Button leftpar, rightpar, sqr, pow, sqrt, tenpow, fact, abs, pi, e, log, ln, sin, cos, tan, ctn;
     ImageButton hist;
     TextView tv, res;
     GridLayout standard;
@@ -34,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Functional Buttons
+        // Standard Buttons
         eq = (Button) findViewById(R.id.jednako);
         tv = (TextView) findViewById(R.id.expression_field);
         res = (TextView) findViewById(R.id.result_field);
@@ -50,6 +51,24 @@ public class MainActivity extends AppCompatActivity {
         hist = (ImageButton) findViewById(R.id.history_icon);
         standard = (GridLayout) findViewById(R.id.standard);
 
+        // Scientific Buttons
+        leftpar = (Button)findViewById(R.id.lft_par);
+        rightpar = (Button)findViewById(R.id.rght_par);
+        sqr = (Button)findViewById(R.id.sqr);
+        pow = (Button)findViewById(R.id.exp);
+        sqrt = (Button)findViewById(R.id.sqrt);
+        tenpow = (Button)findViewById(R.id.ten_pow);
+        fact = (Button)findViewById(R.id.fact);
+        abs = (Button)findViewById(R.id.abs);
+        pi = (Button)findViewById(R.id.pi);
+        e = (Button)findViewById(R.id.e);
+        log = (Button)findViewById(R.id.log);
+        ln = (Button)findViewById(R.id.ln);
+        sin = (Button)findViewById(R.id.sin);
+        cos = (Button)findViewById(R.id.cos);
+        tan = (Button)findViewById(R.id.tan);
+        ctn = (Button)findViewById(R.id.ctn);
+
         // Number Buttons
         jedan = (Button) findViewById(R.id.jedan);
         dva = (Button) findViewById(R.id.dva);
@@ -63,13 +82,12 @@ public class MainActivity extends AppCompatActivity {
         nula = (Button) findViewById(R.id.nula);
 
         // Database
-
         DataMan = new DataManager(this);
 
         eq.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 try {
-                    result = Brain.evaluate(exp);
+                    result = new Brain().evaluate(exp);
                     resStr = String.valueOf(format.format(result));
                     res.setText(resStr);
                     tv.setText(resStr);
@@ -81,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Buttons
+        // Buttons Normal
         jedan.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
                 tv.append("1");
@@ -233,6 +251,120 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Buttons Scientific
+
+        leftpar.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("(");
+                exp = exp + "(";
+            }
+        });
+
+        rightpar.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append(")");
+                exp = exp + ")";
+            }
+        });
+
+        sqr.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("^2");
+                exp = exp + "^2";
+            }
+        });
+
+        pow.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("^");
+                exp = exp + "^";
+            }
+        });
+
+        sqrt.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("√(");
+                exp = exp + "sqrt(";
+            }
+        });
+
+        tenpow.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("10^");
+                exp = exp + "10^";
+            }
+        });
+
+        fact.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("!");
+                exp = exp + "!";
+            }
+        });
+
+        abs.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("abs(");
+                exp = exp + "abs(";
+            }
+        });
+
+        pi.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("π");
+                exp = exp + "pi";
+            }
+        });
+
+        e.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("e");
+                exp = exp + "e";
+            }
+        });
+
+        log.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("log(");
+                exp = exp + "log(";
+            }
+        });
+
+        ln.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("ln(");
+                exp = exp + "ln(";
+            }
+        });
+
+        sin.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("sin(");
+                exp = exp + "sin(";
+            }
+        });
+
+        cos.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("cos(");
+                exp = exp + "cos(";
+            }
+        });
+
+        tan.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("tan(");
+                exp = exp + "tan(";
+            }
+        });
+
+        ctn.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v){
+                tv.append("ctn(");
+                exp = exp + "ctn(";
+            }
+        });
+
         hist.setOnClickListener(new  View.OnClickListener(){
             public void onClick(View v){
                 openHist();
@@ -255,7 +387,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void quickEval(String expression){
         try{
-            res.setText(String.valueOf(format.format(Brain.evaluate(expression))));
+            res.setText(String.valueOf(format.format(new Brain().evaluate(expression))));
         } catch (Exception e){
 
         }
