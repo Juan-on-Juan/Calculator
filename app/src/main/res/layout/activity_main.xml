@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bg">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="293dp"
+        tools:context=".MainActivity">
+
+        <ImageButton
+            android:id="@+id/history_icon"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/history"
+            android:backgroundTint="@color/white"
+            android:contentDescription="@string/history"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/expression_field"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="64dp"
+            android:fontFamily="@font/proximanova"
+            android:gravity="center"
+            android:textColor="@color/transp_white"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/result_field"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:fontFamily="@font/proximanova"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="@color/white"
+            android:textSize="85sp"
+            app:layout_constraintTop_toBottomOf="@+id/expression_field"
+            tools:layout_editor_absoluteX="-4dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <GridLayout
+        android:id="@+id/scientific"
+        android:layout_width="match_parent"
+        android:layout_height="440dp"
+        android:layout_gravity="bottom"
+        android:orientation="horizontal"
+        android:background="@drawable/scibg"
+        android:columnCount="4"
+        android:rowCount="5">
+
+        <Button
+            android:id="@+id/lft_par"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="(" />
+
+        <Button
+            android:id="@+id/rght_par"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text=")" />
+
+        <Button
+            android:id="@+id/sqr"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="^2" />
+
+        <Button
+            android:id="@+id/exp"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="^x" />
+
+        <Button
+            android:id="@+id/sqrt"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="√" />
+
+        <Button
+            android:id="@+id/ten_pow"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="10^" />
+
+        <Button
+            android:id="@+id/fact"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="n!" />
+
+        <Button
+            android:id="@+id/abs"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="|×|" />
+
+        <Button
+            android:id="@+id/pi"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="π" />
+
+        <Button
+            android:id="@+id/e"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="e" />
+
+        <Button
+            android:id="@+id/log"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="log" />
+
+        <Button
+            android:id="@+id/ln"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="ln" />
+
+        <Button
+            android:id="@+id/sin"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="sin" />
+
+        <Button
+            android:id="@+id/cos"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="cos" />
+
+        <Button
+            android:id="@+id/tan"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="tan" />
+
+        <Button
+            android:id="@+id/ctn"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="ctn" />
+
+        <Button
+            android:id="@+id/soon"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="soon" />
+
+        <Button
+            android:id="@+id/soon2"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="soon" />
+
+        <Button
+            android:id="@+id/soon3"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="soon" />
+
+        <Button
+            android:id="@+id/soon4"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:layout_width="20dp"
+            android:text="soon" />
+    </GridLayout>
+
+    <GridLayout
+        android:id="@+id/standard"
+        android:layout_width="match_parent"
+        android:layout_height="442dp"
+        android:layout_gravity="bottom"
+        android:background="@drawable/navbg"
+        android:columnCount="4"
+        android:rowCount="5">
+
+        <Button
+            android:id="@+id/slide"
+            android:layout_height="39dp"
+            android:layout_columnSpan="4"
+            android:layout_columnWeight="2"
+            android:layout_gravity="fill"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/AC"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="AC" />
+
+        <Button
+            android:id="@+id/plusminus"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="+/-" />
+
+        <Button
+            android:id="@+id/del"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="DEL" />
+
+        <Button
+            android:id="@+id/djeljenje"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="/" />
+
+        <Button
+            android:id="@+id/sedam"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="7" />
+
+        <Button
+            android:id="@+id/osam"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="8" />
+
+        <Button
+            android:id="@+id/devet"
+            android:layout_columnWeight="1.25"
+            android:layout_gravity="fill"
+            android:text="9" />
+
+        <Button
+            android:id="@+id/mnozenje"
+            android:layout_columnWeight="1.25"
+            android:layout_gravity="fill"
+            android:text="×" />
+
+        <Button
+            android:id="@+id/cetri"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="4" />
+
+        <Button
+            android:id="@+id/pet"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="5" />
+
+        <Button
+            android:id="@+id/sest"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="6" />
+
+        <Button
+            android:id="@+id/minus"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="-" />
+
+        <Button
+            android:id="@+id/jedan"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="1" />
+
+        <Button
+            android:id="@+id/dva"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="2" />
+
+        <Button
+            android:id="@+id/tri"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="3" />
+
+        <Button
+            android:id="@+id/plus"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="+" />
+
+        <Button
+            android:id="@+id/nula"
+            style="@style/ZroBtn"
+            android:layout_columnSpan="2"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="0" />
+
+        <Button
+            android:id="@+id/tocka"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="." />
+
+        <Button
+            android:id="@+id/jednako"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill"
+            android:text="=" />
+    </GridLayout>
+
+
+</FrameLayout>
