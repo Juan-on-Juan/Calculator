@@ -12,9 +12,8 @@
 - [x] Simple Calculations Support
 - [x] Fix Decimal Places Error
 - [x] History Functional
-- [ ] History UI
-- [ ] Factorial Function
+- [x] Factorial Function
 - [x] Sqrt Function
-- [ ] Switch 'Keyboards' On Slide
-- [ ] Splash Screen
+- [x] Switch 'Keyboards' On Swipe
+- [x] Splash Screen
 - [ ] Documentation -_-

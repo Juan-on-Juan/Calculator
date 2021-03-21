@@ -2,13 +2,20 @@ package com.example.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
+import androidx.core.view.GestureDetectorCompat;
+import androidx.core.view.MotionEventCompat;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.location.LocationListener;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -25,11 +32,15 @@ public class MainActivity extends AppCompatActivity {
     GridLayout standard;
     DataManager DataMan;
 
+    float y1, y2;
+
     String exp = "", resStr;
     double result;
     DecimalFormat format = new DecimalFormat("0.##");
     boolean standardDown = false;
+    boolean noOperatorAfteEq = false;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +104,7 @@ public class MainActivity extends AppCompatActivity {
                     tv.setText(resStr);
                     AddToDB(exp, resStr);
                     exp = "(" + exp + ")";
+                    noOperatorAfteEq = true;
                 } catch(Exception e){
                     // Working on it!
                 }
@@ -102,6 +114,7 @@ public class MainActivity extends AppCompatActivity {
         // Buttons Normal
         jedan.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                checkForOperator();
                 tv.append("1");
                 exp = exp + "1";
                 quickEval(exp);
@@ -110,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
 
         dva.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                checkForOperator();
                 tv.append("2");
                 exp = exp + "2";
                 quickEval(exp);
@@ -118,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
 
         tri.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                checkForOperator();
                 tv.append("3");
                 exp = exp + "3";
                 quickEval(exp);
@@ -126,6 +141,7 @@ public class MainActivity extends AppCompatActivity {
 
         cetiri.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                checkForOperator();
                 tv.append("4");
                 exp = exp + "4";
                 quickEval(exp);
@@ -134,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
         pet.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                checkForOperator();
                 tv.append("5");
                 exp = exp + "5";
                 quickEval(exp);
@@ -142,6 +159,7 @@ public class MainActivity extends AppCompatActivity {
 
         sest.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                checkForOperator();
                 tv.append("6");
                 exp = exp + "6";
                 quickEval(exp);
@@ -150,6 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
         sedam.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                checkForOperator();
                 tv.append("7");
                 exp = exp + "7";
                 quickEval(exp);
@@ -158,6 +177,7 @@ public class MainActivity extends AppCompatActivity {
 
         osam.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                checkForOperator();
                 tv.append("8");
                 exp = exp + "8";
                 quickEval(exp);
@@ -166,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
         devet.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                checkForOperator();
                 tv.append("9");
                 exp = exp + "9";
                 quickEval(exp);
@@ -174,6 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
         nula.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
+                checkForOperator();
                 tv.append("0");
                 exp = exp + "0";
                 quickEval(exp);
@@ -186,6 +208,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 tv.append("+");
                 exp = exp + "+";
+                noOperatorAfteEq = false;
             }
         });
 
@@ -193,6 +216,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 tv.append("-");
                 exp = exp + "-";
+                noOperatorAfteEq = false;
             }
         });
 
@@ -200,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 tv.append("/");
                 exp = exp + "/";
+                noOperatorAfteEq = false;
             }
         });
 
@@ -207,6 +232,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v){
                 tv.append("×");
                 exp = exp + "*";
+                noOperatorAfteEq = false;
             }
         });
 
@@ -224,6 +250,7 @@ public class MainActivity extends AppCompatActivity {
                 tv.setText("");
                 res.setText("0");
                 exp = "";
+                noOperatorAfteEq = false;
             }
         });
 
@@ -297,8 +324,8 @@ public class MainActivity extends AppCompatActivity {
 
         fact.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v){
-                tv.append("!");
-                exp = exp + "!";
+                tv.append("fact(");
+                exp = exp + "fact(";
             }
         });
 
@@ -371,18 +398,64 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        slideNorm.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v){
-                if(!standardDown){
-                    standard.setTranslationY(1200);
-                    standardDown = true;
-                } else {
-                    standard.setTranslationY(0);
-                    standardDown = false;
+        slideNorm.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                switch (event.getAction()){
+                    case(MotionEvent.ACTION_DOWN):
+                        y1 = event.getY();
+                        break;
+                    case(MotionEvent.ACTION_MOVE):
+                        standard.setTranslationY(event.getRawY() - 600);
+                        break;
+                    case(MotionEvent.ACTION_UP):
+                        y2 = event.getY();
+                        float deltaY = y2 - y1;
+                        if(Math.abs(deltaY) > 250){
+                            if(deltaY < 0 && standardDown){
+                                standard.setTranslationY(0);
+                                standardDown = false;
+                            } else {
+                                standard.setTranslationY(1200);
+                                standardDown = true;
+                            }
+                        }
+                        break;
                 }
+                return true;
             }
         });
 
+    }
+
+    /*@Override
+    public boolean onTouchEvent(MotionEvent event) {
+        switch (event.getAction()){
+            case(MotionEvent.ACTION_DOWN):
+                y1 = event.getY();
+                break;
+            case(MotionEvent.ACTION_UP):
+                y2 = event.getY();
+                float deltaY = y2 - y1;
+                if(Math.abs(deltaY) > 250){
+                    if(deltaY < 0){
+                        msg("UP!");
+                    } else {
+                        msg("DOWN!");
+                    }
+                }
+                break;
+        }
+        return super.onTouchEvent(event);
+    }*/
+
+    private void checkForOperator(){
+        if(noOperatorAfteEq){
+            tv.setText("");
+            res.setText("0");
+            exp = "";
+            noOperatorAfteEq = false;
+        }
     }
 
     private void quickEval(String expression){
@@ -407,7 +480,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void msg(String msg){
+    public void msg(String msg){
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 }

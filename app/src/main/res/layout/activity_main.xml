@@ -4,7 +4,8 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@drawable/bg">
+    android:background="@drawable/bg"
+    android:id="@+id/appLayout">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -107,7 +108,7 @@
             android:layout_columnWeight="1"
             android:layout_gravity="fill"
             android:layout_width="20dp"
-            android:text="n!" />
+            android:text="fact" />
 
         <Button
             android:id="@+id/abs"
